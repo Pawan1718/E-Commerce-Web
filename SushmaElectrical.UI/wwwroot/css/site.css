@@ -1,0 +1,92 @@
+html {
+  font-size: 14px;
+}
+.bt{
+    border:2px solid red;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+.custom-link {
+    text-decoration: none;
+    color: inherit; /* Optional: Keep the link color as default */
+}
+.card-img-top {
+    width: 200px;
+    height: 280px;
+}
+.card.shadow {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
+}
+
+
+
+
+
+/* ---------------------------------------------order confirm-----------------------------------------------*/
+
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #f00; /* Change to your desired confetti color */
+    animation: confetti-fall linear 3s infinite;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-50vh) rotateZ(0deg);
+    }
+
+    100% {
+        transform: translateY(100vh) rotateZ(360deg);
+    }
+}
+
+
+.container {
+    padding-top: 40px; /* Adjust the value based on your navbar height */
+}
+
+
+
+
+/*---------------Alert--------------------------------*/
+
+.floating-alert {
+    position: fixed;
+    z-index: 1000; /* Ensure the alert is above other content */
+    width: 100%; /* Make the alert span the entire width */
+    top: 30px; /* Adjust this value to ensure the alert appears below the navbar */
+    left: 0; /* Position the alert flush with the left edge of the viewport */
+}
+
+@media (min-width: 992px) {
+    /* Adjust the position of the alert for larger screens */
+    .floating-alert {
+        top: 20px; /* Adjust this value based on the height of your navbar */
+    }
+}
+
+
+
+/*----------------------------Home Page-----------------------------*/
+

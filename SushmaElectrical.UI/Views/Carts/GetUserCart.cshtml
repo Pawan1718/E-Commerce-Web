@@ -1,0 +1,40 @@
+﻿@model SushmaElectrical.Entities.ShoppingCart
+
+@{
+    ViewData["Title"] = "Your Cart";
+}
+<h1>Your Cart</h1>
+
+<form  action="@Url.Action("GetDeliveryAddress4Order", "Checkout")">
+    @foreach (var cartDetail in Model.CartDetails)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <img src="@cartDetail.Product.ImagesUrl" class="card-img-top" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title">@cartDetail.Product.ProductName</h5>
+                    <p class="card-text"><strong>Price:</strong> &#x20B9;@cartDetail.Product.GrossPrice</p>
+                    <p class="card-text"><strong>Total:</strong> &#x20B9;@(cartDetail.Quantity * cartDetail.Product.GrossPrice)</p>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="selectedItems" value="@cartDetail.Id">
+                        <label class="form-check-label">Select</label>
+                    </div>
+                    <button class="btn btn-outline-secondary" type="button" onclick="location.href='/Carts/AddItem?productId=@cartDetail.Product.Id&redirect=1'">+</button>
+                    <span class="btn btn-outline-secondary">@cartDetail.Quantity</span>
+                    <button class="btn btn-outline-secondary" type="button" onclick="location.href='/Carts/RemoveItem?productId=@cartDetail.Product.Id'">-</button>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total</h5>
+                    <p class="card-text">&#x20B9;@(Model.CartDetails.Select(item => item.Product.GrossPrice * item.Quantity).Sum())</p>
+                    <button type="submit" class="btn btn-primary">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

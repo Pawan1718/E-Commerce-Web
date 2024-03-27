@@ -1,0 +1,95 @@
+﻿@model SushmaElectrical.ViewModels.ProductViewModel
+
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">Product Details</h5>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Attribute</th>
+                                <th>Value</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Product ID</strong></td>
+                                <td>@Html.DisplayFor(model => model.Id)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Product Name</strong></td>
+                                <td>@Html.DisplayFor(model => model.ProductName)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Quantity</strong></td>
+                                <td>@Html.DisplayFor(model => model.Quantity)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Model Number</strong></td>
+                                <td>@Html.DisplayFor(model => model.ModelNumber)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Power Rating</strong></td>
+                                <td>@Html.DisplayFor(model => model.PowerRating)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Voltage</strong></td>
+                                <td>@Html.DisplayFor(model => model.Voltage)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Brand</strong></td>
+                                <td>@Html.DisplayFor(model => model.Brand)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tax</strong></td>
+                                <td>@Html.DisplayFor(model => model.Tax)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gross Price</strong></td>
+                                <td>@Html.DisplayFor(model => model.GrossPrice)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Discount</strong></td>
+                                <td>@Html.DisplayFor(model => model.Discount)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Description</strong></td>
+                                <td>@Html.DisplayFor(model => model.Description)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Net Price</strong></td>
+                                <td>@Html.DisplayFor(model => model.NetPrice)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Category</strong></td>
+                                <td>@Html.DisplayFor(model => model.CategoryName)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th class="text-center">Product Images</th>
+
+                            </tr>
+                            @foreach (var imageUrl in Model.ProductImages.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        <img src="@imageUrl" alt="Product Image" class="product-image" width="150px;" height="150px;" />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            <a asp-action="Index" class="btn btn-secondary">Back</a>
+        </div>
+    </div>
+</div>

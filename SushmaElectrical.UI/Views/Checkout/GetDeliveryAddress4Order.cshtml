@@ -1,0 +1,30 @@
+﻿@model List<SushmaElectrical.ViewModels.GetDeliveryAddressViewModel>
+
+@{
+    ViewData["Title"] = "Delivery Addresses";
+}
+
+<h1>Delivery Addresses</h1>
+
+<form action="@Url.Action("GetPaymentMode", "Checkout")" >
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@item.FullName</h5>
+                    <p class="card-text">Address: @($"{item.FlatHouseNo}, {item.AreaStreet}, {item.Landmark}, {item.TownCity}, {item.State}, {item.Country}, {item.PinCode}")</p>
+                    <p class="card-text">Mobile: @item.Mobile</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="selectedShippingAddress" id="deliveryAddress_@item.Id" value="@item.Id">
+                        <label class="form-check-label" for="deliveryAddress_@item.Id">Select Address</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+    </div>
+</form>

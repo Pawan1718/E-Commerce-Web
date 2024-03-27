@@ -1,0 +1,208 @@
+﻿@using SushmaElectrical.ViewModels
+@model IEnumerable<OrderViewModel>
+
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+<style>
+    .card-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .order-card {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+        .order-card .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        .order-card .card-body {
+            padding: 20px;
+        }
+
+    .order-details ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .order-details li {
+        margin-bottom: 10px;
+    }
+
+        .order-details li img {
+            margin-right: 10px;
+        }
+
+    .total-price {
+        font-weight: bolder;
+        margin-top: 10px;
+       
+    }
+
+    .order-status {
+        float: right;
+    }
+
+    .order-details hr {
+        margin: 10px 0;
+        border: none;
+        border-top: 1px solid #ddd;
+    }
+
+    .customer-info {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .info-item {
+        margin-right: 50px;
+        margin-bottom: 10px;
+    }
+
+        .info-item strong {
+            margin-right: 5px;
+            font-weight: bold;
+        }
+
+        .info-item span {
+            display: inline-block;
+        }
+</style>
+<div class="container"></div>
+<h1>Order Details</h1>
+
+<div class="row">
+    @if (Model != null && Model.Any())
+    {
+        <div class="accordion" id="accordionExample">
+            @foreach (var order in Model)
+            {
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading@order.Id">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse@order.Id" aria-expanded="true" aria-controls="collapse@order.Id">
+                            Order ID: @order.Id - @order.OrderStatus
+                        </button>
+                    </h2>
+                    <div id="collapse@order.Id" class="accordion-collapse collapse" aria-labelledby="heading@order.Id" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="customer-info">
+                                <div class="info-item">
+                                    <strong>Customer Name:</strong>
+                                    <span>@order.FullName</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Mobile Number:</strong>
+                                    <span>@order.Mobile</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Shipping Address:</strong>
+                                    <span>@order.FlatHouseNo, @order.AreaStreet, @order.Landmark, @order.TownCity, @order.State - @order.PinCode, @order.Country</span>
+                                </div>
+                            </div>
+                            <hr />
+                            <ul class="order-items">
+                                @foreach (var orderDetail in order.OrderDetails)
+                                {
+                                    <li>
+                                        <div class="order-item">
+                                            <img src="@orderDetail.Product.ImagesUrl" class="card-img" alt="@orderDetail.Product.ProductName">
+                                            <div class="item-info">
+                                                <div class="info-item">
+                                                    <strong>Product Name:</strong>
+                                                    <span>@orderDetail.Product.ProductName</span>
+                                                </div>
+                                                <div class="info-item">
+                                                    <strong>Category:</strong>
+                                                    <span>@orderDetail.Product.Category.CategoryName</span>
+                                                </div>
+                                                <div class="info-item">
+                                                    <strong>Brand:</strong>
+                                                    <span>@orderDetail.Product.Brand</span>
+                                                </div>
+                                                <div class="info-item">
+                                                    <strong>Specification:</strong>
+                                                    <span>@orderDetail.Product.Description, @orderDetail.Product.Voltage, @orderDetail.Product.PowerRating</span>
+                                                </div>                                              
+                                                <div class="info-item">
+                                                    <strong>Quantity:</strong>
+                                                    <span>@orderDetail.Quantity</span>
+                                                </div>
+                                                <div class="info-item">
+                                                    <strong>Unit Price:</strong>
+                                                    <span>@orderDetail.Product.GrossPrice</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                            <div class="total-price  text-dark p-1 rounded border border-dark col-2">
+                                <h5 class="mb-0">Total Price:</h5>
+                                <p class="mb-0">₹@order.GrossPrice</p>
+                            </div>
+
+                            <div class="actions mt-3">
+                                @if (order.OrderStatus ==(int)OrderStatus.Pending)
+                                {
+                                    <a asp-action="OrderIssue" asp-controller="Order" asp-route-orderId="@order.Id" class="btn btn-primary order-issue">Order Issue</a>
+
+                                }
+                                else if (order.OrderStatus == (int)OrderStatus.Shipped)
+                                {
+
+                                }
+                                else if (order.OrderStatus == (int)OrderStatus.Delivered)
+                                {
+                                    <a asp-action="" asp-controller="" asp-route-orderId="@order.Id" class="btn btn-primary order-issue"></a>
+
+                                }
+                                else if (order.OrderStatus == (int)OrderStatus.Completed)
+                                {
+                                    <a asp-action="" asp-controller="" asp-route-orderId="@order.Id" class="btn btn-primary order-issue">Close</a>
+
+                                }
+                                else if (order.OrderStatus == (int)OrderStatus.Cancelled)
+                                {
+                                    <a asp-action="" asp-controller="" asp-route-orderId="@order.Id" class="btn btn-primary order-issue">Close</a>
+
+                                }
+                                <a class="btn btn-secondary back" asp-action="GetUserOrders">Back</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="col-md-12">
+            <p>No orders found.</p>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        // Add JavaScript for any interactivity or enhancements
+        document.querySelectorAll('.order-issue').forEach(item => {
+            item.addEventListener('click', event => {
+                // Add functionality for reporting issues
+                console.log('Order issue reported');
+            });
+        });
+
+        document.querySelectorAll('.back').forEach(item => {
+            item.addEventListener('click', event => {
+                // Add functionality for navigating back
+                console.log('Back button clicked');
+            });
+        });
+    </script>
+}

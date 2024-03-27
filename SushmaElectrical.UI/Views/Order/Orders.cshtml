@@ -1,0 +1,129 @@
+﻿@using SushmaElectrical.Infrastructure.GlobalConfiguration
+@using SushmaElectrical.ViewModels
+@model IEnumerable<OrderViewModel>
+
+@{
+    ViewData["Title"] = "My Orders";
+}
+<style>
+    .order-card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+        .order-card .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .order-card .card-body {
+            padding: 20px;
+        }
+
+    .order-details ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .order-details li {
+        margin-bottom: 20px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 20px;
+    }
+
+        .order-details li:last-child {
+            border-bottom: none;
+        }
+
+    .order-details .product-details {
+        display: flex;
+        align-items: center;
+    }
+
+        .order-details .product-details img {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+
+        .order-details .product-details .product-info {
+            flex-grow: 1;
+        }
+
+    .total-price {
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    .cancel-order-btn {
+        margin-top: 10px;
+    }
+</style>
+
+<div class="container">
+    <h1>My Orders</h1>
+
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var order in Model)
+            {
+                <div class="col-md-12">
+                    <div class="card order-card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h5 class="card-title">Order ID: @order.Id</h5>
+                                </div>
+                                <div class="col-sm-6 text-sm-right">
+                                    <p class="card-text">
+                                        <small class="text-muted">Order Date: @order.OrderDate.ToShortDateString()</small>
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Order Status: @Enum.GetName(typeof(OrderStatus), order.OrderStatus)</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="card-body order-details">
+                            <ul>
+                                @foreach (var orderDetail in order.OrderDetails)
+                                {
+                                    <li>
+                                        <div class="product-details">
+                                            <img src="@orderDetail.Product.ImagesUrl" class="card-img" alt="@orderDetail.Product.ProductName">
+                                            <div class="product-info">
+                                                <div><strong>Product Name:</strong> @orderDetail.Product.ProductName</div>
+                                                <div><strong>Category:</strong> @orderDetail.Product.Category.CategoryName</div>
+                                                <div><strong>Quantity:</strong> @orderDetail.Quantity</div>
+                                                <div><strong>Price:</strong> ₹@orderDetail.Product.GrossPrice</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                            <div class="total-price">
+                                Total Price: ₹@order.GrossPrice
+                            </div>
+                            @if (order.OrderStatus == (int)OrderStatus.Pending)
+                            {
+                                <button asp-action="CancelOrder" asp-controller="Order" asp-route-orderId="@order.Id" class="btn btn-danger cancel-order-btn">Cancel Order</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-md-12">
+                <p>No orders found.</p>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34601.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SushmaElectrical.UI", "SushmaElectrical.UI\SushmaElectrical.UI.csproj", "{D857F356-8268-4060-AC6B-77EA01113A3D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SushmaElectrical.Entities", "SushmaElectrical.Entities\SushmaElectrical.Entities.csproj", "{5665C275-C11C-4BCE-A734-0C40EC6DA099}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SushmaElectrical.ViewModels", "SushmaElectrical.ViewModels\SushmaElectrical.ViewModels.csproj", "{78E684F7-46EA-47E9-A057-8CB71CBFE858}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SushmaElectrical.Repositories", "SushmaElectrical.Repositories\SushmaElectrical.Repositories.csproj", "{0CAE1C7B-A925-42C4-9F0D-A3C3B4DF5451}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SushmaElectrical.Infrastructure", "SushmaElectrical.Infrastructure\SushmaElectrical.Infrastructure.csproj", "{11A6DA90-A74C-464A-9328-CDFB97E2621C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SushmaElectrical.Extensions", "SushmaElectrical.Extensions\SushmaElectrical.Extensions.csproj", "{E5D4B74B-3959-4929-93A3-216045648C88}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D857F356-8268-4060-AC6B-77EA01113A3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D857F356-8268-4060-AC6B-77EA01113A3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D857F356-8268-4060-AC6B-77EA01113A3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D857F356-8268-4060-AC6B-77EA01113A3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5665C275-C11C-4BCE-A734-0C40EC6DA099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5665C275-C11C-4BCE-A734-0C40EC6DA099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5665C275-C11C-4BCE-A734-0C40EC6DA099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5665C275-C11C-4BCE-A734-0C40EC6DA099}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78E684F7-46EA-47E9-A057-8CB71CBFE858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78E684F7-46EA-47E9-A057-8CB71CBFE858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78E684F7-46EA-47E9-A057-8CB71CBFE858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78E684F7-46EA-47E9-A057-8CB71CBFE858}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CAE1C7B-A925-42C4-9F0D-A3C3B4DF5451}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CAE1C7B-A925-42C4-9F0D-A3C3B4DF5451}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CAE1C7B-A925-42C4-9F0D-A3C3B4DF5451}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CAE1C7B-A925-42C4-9F0D-A3C3B4DF5451}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11A6DA90-A74C-464A-9328-CDFB97E2621C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11A6DA90-A74C-464A-9328-CDFB97E2621C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11A6DA90-A74C-464A-9328-CDFB97E2621C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11A6DA90-A74C-464A-9328-CDFB97E2621C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5D4B74B-3959-4929-93A3-216045648C88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5D4B74B-3959-4929-93A3-216045648C88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5D4B74B-3959-4929-93A3-216045648C88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5D4B74B-3959-4929-93A3-216045648C88}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6FA41BA9-C20B-47AB-BAC6-B2EA8F1606FF}
+	EndGlobalSection
+EndGlobal

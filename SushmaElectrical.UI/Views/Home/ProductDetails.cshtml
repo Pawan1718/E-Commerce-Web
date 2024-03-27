@@ -1,0 +1,68 @@
+﻿@model SushmaElectrical.ViewModels.ProductViewModel
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<!-- Bootstrap CSS -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @foreach (var imageUrl in Model.ProductImages.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        <div class="carousel-item @(imageUrl == Model.ProductImages.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).First() ? "active" : "")">
+                            <img src="@imageUrl" class="d-block w-100" alt="Product Image">
+                        </div>
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>@Model.ProductName</h2>
+            <p>@Model.Description</p>
+            <p><strong>Brand:</strong> @Model.Brand</p>
+            <p><strong>Model Number:</strong> @Model.ModelNumber</p>
+            <p><strong>Voltage:</strong> @Model.Voltage</p>
+            <p><strong>Power Rating:</strong> @Model.PowerRating</p>
+            <p><strong>Category:</strong> @Model.CategoryName</p>
+            <p><strong>Net Price:</strong> &#x20B9;@Model.NetPrice</p>
+            <p><strong>Discount:</strong> @Model.Discount%</p>
+            <p><strong>Final Price:</strong> &#x20B9;@(Model.NetPrice - (Model.NetPrice * (Model.Discount / 100)))</p>
+            <a href="@Url.Action("BookNow", new { id = Model.Id })" class="btn btn-primary">Buy Now</a>
+               
+            <button type="button" onclick="addToCart(@Model.Id)" class="btn btn-outline-info">Add To Cart</button>
+            
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+        async function addToCart(productId) {
+            try {
+                var response = await fetch(`/Carts/AddItem?productId=${productId}`);
+                if (response.status == 200) {
+                    var result = await response.json();
+                    console.log(result);
+                    var cartCountEl = document.getElementById("cartCount");
+                    cartCountEl.innerHTML = result;
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    </script>
+}

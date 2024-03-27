@@ -1,0 +1,114 @@
+﻿@model SushmaElectrical.ViewModels.CheckoutSummaryViewModel
+
+<style>
+    .shipping-details p {
+        margin-right: 10px; /* Adjust margin as needed */
+    }
+</style>
+
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title">Checkout Summary</h1>
+
+        <!-- Selected Items -->
+        <div class="card mt-3">
+            <div class="card-body">
+                <h4 class="card-title">Selected Items</h4>
+                <div class="row">
+                    @foreach (var item in Model.SelectedItems.cartDetails)
+                    {
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class=" mb-3 pr-3">
+                                        <img src="@item.ProductImage" class="card-img" alt="Product Image" style="max-width: 100px;">
+                                    </div>
+                                    <div>
+                                        @{
+                                            string productDescription = item.Description.Length > 50 ? item.Description.Substring(0, 47) + "..." : item.Description;
+                                        }
+                                        <h5 class="card-title">@item.ProductName @productDescription</h5>
+                                        <p class="card-text">
+                                            <span class="font-weight-bold">Quantity:</span> @item.Quantity &times;
+                                            <span class="font-weight-bold">Price:</span> ₹@item.Price
+                                        </p>
+                                        <p class="card-text">Total: ₹@(item.Price * item.Quantity)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        @{
+                            decimal totalPrice = Model.SelectedItems.cartDetails.Sum(item => item.Price * item.Quantity);
+                        }
+                        <p class="mb-0">Total Price: ₹@totalPrice</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <h4 class="card-title">Payment Mode</h4>
+                <p class="mb-0">@Model.SelectedPaymentMode.PaymentModeTitle</p>
+            </div>
+        </div>
+
+        <!-- Shipping Address -->
+        <div class="card mt-3">
+            <div class="card-body">
+                <h4 class="card-title">Shipping Address</h4>
+                <div class="shipping-details">
+                    <p class="mb-1">@Model.ShippingAddress.FullName</p>
+                    <p class="mb-1">@Model.ShippingAddress.Mobile</p>
+                    @{
+                        string fullAddress = $"{Model.ShippingAddress.FlatHouseNo}, {Model.ShippingAddress.AreaStreet}, {Model.ShippingAddress.Landmark}";
+                        string townCity = $"{Model.ShippingAddress.TownCity} - {Model.ShippingAddress.PinCode}, {Model.ShippingAddress.State}, {Model.ShippingAddress.Country}";
+                    }
+                    <p class="mb-1">Address: @fullAddress</p>
+                    <p class="mb-0">@townCity</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Button to trigger AJAX request -->
+        <button id="proceedButton" class="btn btn-success">Proceed (AJAX)</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Function to handle AJAX submission
+        function submitFormData() {
+            var formData = {
+                cartId: @Model.SelectedItems.CartId, // Replace with actual CartId property
+                deliveryAddressId: @Model.ShippingAddress.Id, // Replace with actual ShippingAddress Id property
+                paymentModeId: @Model.SelectedPaymentMode.Id // Replace with actual SelectedPaymentMode Id property
+                    };
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("PlaceOrder", "Checkout")",
+                data: formData,
+                success: function (response) {
+                    // Handle success response
+                    console.log("Order placed successfully!");
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response
+                    console.error("An error occurred:", error);
+                }
+            });
+        }
+
+        // Bind click event to the button
+        $(document).ready(function () {
+            $("#proceedButton").click(function () {
+                submitFormData();
+            });
+        });
+    </script>
+}

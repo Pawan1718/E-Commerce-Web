@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SushmaElectrical.ViewModels.ShippingViewModel>
+
+@{
+    ViewData["Title"] = "GetAllShippingDetails";
+}
+<div class="container"></div>
+<h1 class="mb-4">Shipping Adresses</h1>
+<hr />
+<p class="text-center">
+    <a asp-action="AddShippingDetails" class="btn btn-sm btn-outline-info btn-lg d-inline-block mr-2 ">
+        <i class="fa-solid fa-address-book"></i> Add Address
+    </a>
+    <a asp-action="GetUserCart" asp-controller="Carts" class="btn btn-sm btn-outline-info btn-lg d-inline-block mr-2">
+        <i class="fa-solid fa-cart-shopping"></i> Redirect to Cart
+    </a>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-sm btn-outline-info btn-lg d-inline-block">
+        <i class="fa-solid fa-house"></i> Go to Home
+    </a>
+</p>
+
+
+
+
+@if (Model == null || !Model.Any())
+{
+    <div class="container d-flex justify-content-center align-items-center vh-80">
+        <div>
+            <h4>No addresses found</h4>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-3 shadow">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#addressCollapse_@item.Id" aria-expanded="false" aria-controls="addressCollapse_@item.Id">
+                                @item.FullName
+                            </button>
+                        </h5>
+                    </div>
+                    <div class="collapse" id="addressCollapse_@item.Id">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <strong>Address:</strong><br />
+                                @item.FlatHouseNo<br />
+                                @item.AreaStreet<br />
+                                @item.Landmark<br />
+                                @item.Village<br />
+                                @item.TownCity<br />
+                                @item.State<br />
+                                @item.Country<br />
+                                @item.PinCode
+                            </p>
+                            <div class="btn-group">
+                                <a class="btn btn-outline-info me-2" href="@Url.Action("EditShippingDetails", new { id = item.Id })">Edit</a>
+                                <a class="btn btn-outline-danger me-2" href="@Url.Action("Delete", new { id = item.Id })">Delete</a>
+                                <label class="btn btn-outline-secondary">
+                                    <input type="checkbox" class="form-check-input defaultAddressCheckbox visually-hidden" id="defaultAddressCheckbox_@item.Id" name="defaultAddressCheckbox" data-id="@item.Id" @(item.DefaultAddress ? "checked" : "") />
+                                    Set as Default
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+ 
+}
+@section scripts {
+    <script src="~/js/shippingdetails.js"></script>
+}

@@ -1,0 +1,102 @@
+﻿@model SushmaElectrical.ViewModels.ShippingViewModel
+
+@{
+    ViewData["Title"] = "EditShippingDetails";
+}
+
+<h1>EditShippingDetails</h1>
+
+<h4>ShippingViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditShippingDetails">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div>
+                        <input type="hidden" asp-for="Id" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FullName" class="form-label">Full Name</label>
+                        <input asp-for="FullName" class="form-control" required />
+                        <div class="invalid-feedback">Please enter your full name.</div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Mobile" class="form-label">Mobile</label>
+                        <input asp-for="Mobile" class="form-control" required />
+                        <div class="invalid-feedback">Please enter your mobile number.</div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FlatHouseNo" class="form-label">Flat/House No.</label>
+                        <input asp-for="FlatHouseNo" class="form-control" required />
+                        <div class="invalid-feedback">Please enter your flat/house number.</div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="AreaStreet" class="form-label">Area/Street</label>
+                        <input asp-for="AreaStreet" class="form-control" required />
+                        <div class="invalid-feedback">Please enter your area/street.</div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Landmark" class="form-label">Landmark</label>
+                        <input asp-for="Landmark" class="form-control" required />
+                        <div class="invalid-feedback">Please enter a landmark.</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Country" class="form-label">Country</label>
+                        <select asp-for="Country" class="form-control" required>
+                            <option value="IN">India</option>
+                            <!-- Add more options for other countries if needed -->
+                        </select>
+                        <div class="invalid-feedback">Please select your country.</div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="State" class="form-label">State</label>
+                        <select asp-for="State" class="form-control" required>
+                            <option value="MH">Maharashtra</option>
+                            <!-- Add more options for other states if needed -->
+                        </select>
+                        <div class="invalid-feedback">Please select your state.</div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TownCity" class="form-label">Town/City</label>
+                        <select asp-for="TownCity" class="form-control" required>
+                            <option value="">Select Town/City</option>
+                            <option value="Nagpur">Nagpur</option>
+                            <option value="Akola">Akola</option>
+                            <option value="Amravati">Amravati</option>
+                            <!-- Add more options for towns/cities in Vidarbha region -->
+                            <option value="Yavatmal">Yavatmal</option>
+                            <option value="Chandrapur">Chandrapur</option>
+                            <option value="Gondia">Gondia</option>
+                            <!-- Add more options as needed -->
+                        </select>
+                        <div class="invalid-feedback">Please select your town/city.</div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Village" class="form-label">Village</label>
+                        <input asp-for="Village" class="form-control" required />
+                        <div class="invalid-feedback">Please enter your village.</div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PinCode" class="form-label">Pin Code</label>
+                        <input asp-for="PinCode" class="form-control" required />
+                        <div class="invalid-feedback">Please enter your pin code.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="GetAllShippingDetails" class="btn btn-secondary">Back</a>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
